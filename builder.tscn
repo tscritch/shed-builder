@@ -1,0 +1,136 @@
+[gd_scene load_steps=12 format=3 uid="uid://b32rsbiiapvil"]
+
+[ext_resource type="Script" path="res://_data.gd" id="1_53x2d"]
+[ext_resource type="Script" path="res://building.gd" id="2_cnk4n"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xtdt8"]
+size = Vector3(1, 0.127, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3vnx"]
+albedo_color = Color(0.576235, 0.582332, 0.584944, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kju1x"]
+size = Vector2(100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4i1cn"]
+albedo_color = Color(0.138704, 0.386245, 0.224661, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4v3fg"]
+sky_top_color = Color(0.69795, 0.837469, 0.99318, 1)
+sky_horizon_color = Color(0.470056, 0.672783, 0.889535, 1)
+sky_curve = 0.0315335
+ground_bottom_color = Color(0.203592, 0.431812, 0.180688, 1)
+ground_curve = 0.00554783
+
+[sub_resource type="Sky" id="Sky_nldap"]
+sky_material = SubResource("ProceduralSkyMaterial_4v3fg")
+
+[sub_resource type="Environment" id="Environment_5ywhe"]
+background_mode = 2
+sky = SubResource("Sky_nldap")
+ambient_light_source = 3
+ambient_light_energy = 1.45
+fog_mode = 1
+fog_light_energy = 0.65
+fog_density = 1.0
+fog_depth_curve = 0.03125
+fog_depth_begin = 0.0
+fog_depth_end = 311.1
+volumetric_fog_density = 0.2717
+volumetric_fog_emission_energy = 14.15
+volumetric_fog_length = 172.57
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_2iqt1"]
+exposure_multiplier = 0.998
+dof_blur_near_distance = 0.01
+
+[sub_resource type="Compositor" id="Compositor_oxxlw"]
+
+[node name="Root" type="Node"]
+
+[node name="_data" type="Node" parent="."]
+script = ExtResource("1_53x2d")
+
+[node name="Building" type="Node3D" parent="."]
+script = ExtResource("2_cnk4n")
+
+[node name="FoundationMesh" type="MeshInstance3D" parent="Building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.064, 2.08165e-12)
+mesh = SubResource("BoxMesh_xtdt8")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_l3vnx")
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Building"]
+mesh = SubResource("PlaneMesh_kju1x")
+surface_material_override/0 = SubResource("StandardMaterial3D_4i1cn")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -191.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WidthInput" type="HBoxContainer" parent="UI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Width" type="Label" parent="UI/ScrollContainer/VBoxContainer/WidthInput"]
+layout_mode = 2
+text = "Width"
+
+[node name="Input" type="SpinBox" parent="UI/ScrollContainer/VBoxContainer/WidthInput"]
+layout_mode = 2
+max_value = 1000.0
+value = 1.0
+alignment = 1
+suffix = "m"
+
+[node name="DepthInput" type="HBoxContainer" parent="UI/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Depth" type="Label" parent="UI/ScrollContainer/VBoxContainer/DepthInput"]
+layout_mode = 2
+text = "Depth"
+
+[node name="Input" type="SpinBox" parent="UI/ScrollContainer/VBoxContainer/DepthInput"]
+layout_mode = 2
+max_value = 1000.0
+value = 1.0
+alignment = 1
+suffix = "m"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2, 3, 2)
+fov = 76.4
+far = 207.58
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ywhe")
+camera_attributes = SubResource("CameraAttributesPractical_2iqt1")
+compositor = SubResource("Compositor_oxxlw")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.979575, 0.201078, 3.41416e-16, -0.196829, 0.958874, 0.204496, 0.0411196, -0.200319, 0.978867, 2.08165e-12, 2.08165e-12, 2.08165e-12)
+light_energy = 6.67
+light_indirect_energy = 2.425
+light_volumetric_fog_energy = 0.0
+shadow_bias = 0.003
+shadow_normal_bias = 0.738
+shadow_blur = 1.11
