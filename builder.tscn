@@ -53,6 +53,7 @@ script = ExtResource("1_53x2d")
 
 [node name="Building" type="Node3D" parent="."]
 script = ExtResource("2_cnk4n")
+ANIM_SPEED = 20
 
 [node name="FoundationMesh" type="MeshInstance3D" parent="Building"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.064, 2.08165e-12)
