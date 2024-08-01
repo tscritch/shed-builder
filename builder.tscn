@@ -72,6 +72,8 @@ anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -191.0
+offset_top = 15.0
+offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -102,6 +104,10 @@ value = 1.0
 alignment = 1
 suffix = "m"
 
+[node name="Container" type="Container" parent="UI/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 8)
+layout_mode = 2
+
 [node name="DepthInput" type="HBoxContainer" parent="UI/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
@@ -118,8 +124,8 @@ alignment = 1
 suffix = "m"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.5, 0.5, 2.4663e-16, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 2, 3, 2)
-fov = 76.4
+transform = Transform3D(0.707107, -0.333056, 0.623758, 3.07674e-16, 0.882127, 0.471012, -0.707107, -0.333056, 0.623758, 2, 1.5, 2)
+fov = 48.2
 far = 207.58
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
